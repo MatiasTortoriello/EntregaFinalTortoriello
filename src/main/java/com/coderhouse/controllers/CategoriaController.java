@@ -46,6 +46,7 @@ public class CategoriaController {
 		}
 	}
 
+	
 	@PostMapping
 	public ResponseEntity<Categoria> createCategoria(@RequestBody Categoria categoria) {
 		try {
