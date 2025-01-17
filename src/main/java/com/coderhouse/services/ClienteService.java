@@ -46,9 +46,7 @@ public class ClienteService {
 			cliente.setDni(clienteDetails.getDni());
 		}
 		
-		if(clienteDetails.getLegajo() != null && !clienteDetails.getLegajo().isEmpty()) {
-			cliente.setLegajo(clienteDetails.getLegajo());
-		}
+
 		
 		return clienteRepository.save(cliente);
 	}

@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Cursos")
+@Table(name = "Productos")
 public class Producto {
 
 	@Id // Primary Key
@@ -28,11 +28,11 @@ public class Producto {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-			name = "curso_alumno", 
-			joinColumns = @JoinColumn(name = "curso_id"), 
-			inverseJoinColumns = @JoinColumn(name = "alumno_id"))
+			name = "producto_cliente", 
+			joinColumns = @JoinColumn(name = "producto_id"), 
+			inverseJoinColumns = @JoinColumn(name = "cliente_id"))
 	@JsonIgnore
-	private List<Cliente> alumnos = new ArrayList<>();
+	private List<Cliente> clientes = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Categoria categoria;
@@ -66,21 +66,17 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public List<Cliente> getAlumnos() {
-		return alumnos;
+	public List<Cliente> getClientes() {
+		return clientes;
 	}
 
-	public void setAlumnos(List<Cliente> alumnos) {
-		this.alumnos = alumnos;
+	public void setAlumnos(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
-	@Override
-	public String toString() {
-		return "Curso [id=" + id + ", nombre=" + nombre + "]";
-	}
 
 }

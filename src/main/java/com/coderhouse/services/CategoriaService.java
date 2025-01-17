@@ -22,7 +22,7 @@ public class CategoriaService {
 
 	public Categoria getCategoriaById(Long id) {
 		return categoriaRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Categoria no encontrado"));
+				.orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada"));
 
 	}
 
@@ -38,7 +38,7 @@ public class CategoriaService {
 	@Transactional
 	public Categoria updateCategoria(Long id, Categoria categoraDetails) {
 		Categoria categoria = categoriaRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Categoria no fue encontrada"));
+				.orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada"));
 		categoria.setNombre(categoraDetails.getNombre());
 		return categoriaRepository.save(categoria);
 
