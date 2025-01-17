@@ -60,14 +60,14 @@ public class Categoria {
 		return productos;
 	}
 
-	public void setCursos(List<Producto> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
 	
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + "]";
+		return "Categoria del Producto [ID =" + id + ", Nombre =" + nombre + "]";
 	}
 	
 	

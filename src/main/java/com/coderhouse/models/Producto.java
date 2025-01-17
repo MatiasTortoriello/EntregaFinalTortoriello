@@ -70,7 +70,7 @@ public class Producto {
 		return clientes;
 	}
 
-	public void setAlumnos(List<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 
