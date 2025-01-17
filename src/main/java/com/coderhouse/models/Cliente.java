@@ -88,7 +88,7 @@ public class Cliente {
 		return productos;
 	}
 
-	public void setCursos(List<Producto> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
