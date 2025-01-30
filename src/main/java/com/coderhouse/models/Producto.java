@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,17 +16,29 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Productos")
 public class Producto {
 
-	@Id // Primary Key
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(name = "Nombre", length = 30, nullable = false)
 	private String nombre;
+	
+	@Column(name = "precio", length = 30, nullable = false)
+	private Float precio;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -32,51 +46,11 @@ public class Producto {
 			joinColumns = @JoinColumn(name = "producto_id"), 
 			inverseJoinColumns = @JoinColumn(name = "cliente_id"))
 	@JsonIgnore
+	
 	private List<Cliente> clientes = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Categoria categoria;
-
-	public Producto() {
-		super();
-	}
-
-	public Producto(String nombre) {
-		this();
-		this.nombre = nombre;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
+	 @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) 
+	 @JsonIgnore                                                                                 
+	 private List<FacturaDetalle> facturaDetalles; 
 
 }

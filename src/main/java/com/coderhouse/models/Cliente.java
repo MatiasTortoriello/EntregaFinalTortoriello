@@ -12,9 +12,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Clientes")
 public class Cliente {
@@ -23,9 +31,10 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Autoincrement
 	private Long id;	
 	
-	@Column(name = "Nombre")
+	@Column(name = "Nombre", length = 30, nullable = false)
 	private String nombre;
 	
+	@Column(name = "Apellido", length = 50, nullable = false)
 	private String apellido;
 
 	@Column(unique = true, nullable = false) // Va a ser Unico y No Nulo
@@ -36,71 +45,6 @@ public class Cliente {
 	private List<Producto> productos = new ArrayList<>();
 
 	private LocalDateTime createdAt;
-
-	public Cliente() {
-		super();
-	}
-	
-	public Cliente(String nombre, String apellido, int dni) {
-		this();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
-
-	}
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public int getDni() {
-		return dni;
-	}
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-
-
-
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
 
 
 }
