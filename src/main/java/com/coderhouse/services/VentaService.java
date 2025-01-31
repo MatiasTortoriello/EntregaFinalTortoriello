@@ -1,6 +1,12 @@
-/*package com.coderhouse.services;
+package com.coderhouse.services;
 
 
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.coderhouse.dtos.PedidoDeVentatDTO;
 import com.coderhouse.dtos.TimeApiResponseDTO;
 import com.coderhouse.exceptionHandler.VentaException;
 import com.coderhouse.models.Cliente;
@@ -9,24 +15,19 @@ import com.coderhouse.models.Producto;
 import com.coderhouse.models.Venta;
 import com.coderhouse.models.VentaDeProducto;
 import com.coderhouse.repositories.ClienteRepository;
-import com.coderhouse.repositories.FacturaRepository;
 import com.coderhouse.repositories.ProductoRepository;
 import com.coderhouse.repositories.VentaDeProductoRepository;
-
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import com.coderhouse.repositories.VentaRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FacturaService {
+public class VentaService {
 
     @Autowired
-    private FacturaRepository ventaRepository;
+    private VentaRepository ventaRepository;
 
     @Autowired
     ClienteRepository clienteRepository;
@@ -35,7 +36,7 @@ public class FacturaService {
     ProductoRepository productoRepository;
 
     @Autowired
-    VentaDeProductoRepository productoVentaRepository;
+    VentaDeProductoRepository ventaDeProductoRepository;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -50,10 +51,10 @@ public class FacturaService {
     }
 
     @Transactional
-    public Venta createVenta(PedidoDeVentaDTO ventaRequestDTO) throws VentaException {
+    public Venta createVenta(PedidoDeVentatDTO pedidoDeVentaDTO) throws VentaException {
         // Valido cliente
-        Cliente cliente = clienteRepository.findById(ventaRequestDTO.getCliente().getClienteId())
-                .orElseThrow(() -> new VentaException("Cliente no encontrado con ID: " + ventaRequestDTO.getCliente().getClienteId()));
+        Cliente cliente = clienteRepository.findById(pedidoDeVentaDTO.getCliente().getClienteId())
+                .orElseThrow(() -> new VentaException("Cliente no encontrado con ID: " + pedidoDeVentaDTO.getCliente().getClienteId()));
 
         // Crear la venta
         Venta venta = new Venta();
@@ -65,39 +66,37 @@ public class FacturaService {
         int cantidadProductos = 0;
 
         // Procesar cada línea de la venta
-        for (VentaRequestDTO.Linea linea : ventaRequestDTO.getLineas()) {
+        for (PedidoDeVentatDTO.Linea linea : pedidoDeVentaDTO.getLineas()) {
             Producto producto = productoRepository.findById(linea.getProducto().getProductoId())
                     .orElseThrow(() -> new VentaException("Producto no encontrado con ID: " + linea.getProducto().getProductoId()));
 
             // Validar stock
             if (producto.getStock() < linea.getCantidad()) {
-                throw new VentaException("Stock insuficiente para el producto: " + producto.getTitulo());
+                throw new VentaException("Stock insuficiente para el producto: " + producto.getNombre());
             }
 
             // Reducir stock
             producto.setStock(producto.getStock() - linea.getCantidad());
             productoRepository.save(producto);
 
-            // Crear una copia del producto en el momento de la venta
+    
             VentaDeProducto ventaDeProducto = new VentaDeProducto();
-            ventaDeProducto.setTitulo(producto.getTitulo());
-            ventaDeProducto.setDescripcion(producto.getDescripcion());
+            ventaDeProducto.setNombre(producto.getNombre());
             ventaDeProducto.setPrecio(producto.getPrecio());
-            ventaDeProducto.setStock(producto.getStock());
             ventaDeProducto.setCategoria(producto.getCategoria());
 
-            productoVentaRepository.save(productoVenta);
+            ventaDeProductoRepository.save(ventaDeProducto);
 
-            // Crear detalle de venta
+    
             DetalleDeVenta detalle = new DetalleDeVenta();
             detalle.setVenta(venta);
-            detalle.setProductoVenta(productoVenta);
+            detalle.setVentaDeProducto(ventaDeProducto);
             detalle.setCantidad(linea.getCantidad());
-            detalle.setPrecioUnitario(producto.getPrecio());
+            detalle.setPrecio(producto.getPrecio());
 
             venta.getDetalles().add(detalle);
 
-            // Calcular totales
+          
             precioTotal += producto.getPrecio() * linea.getCantidad();
             cantidadProductos += linea.getCantidad();
         }
@@ -141,4 +140,4 @@ public class FacturaService {
             throw new IllegalArgumentException("No se encontro venta con ID: " + id);
         }
     }
-}*/
+}

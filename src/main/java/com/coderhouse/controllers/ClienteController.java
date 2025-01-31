@@ -2,6 +2,7 @@ package com.coderhouse.controllers;
 
 import java.util.List;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coderhouse.dtos.ClienteDTO;
 import com.coderhouse.models.Cliente;
 import com.coderhouse.services.ClienteService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name ="Cliente", description = "Cliente Management System")
 @RestController
-
-
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
+	
+	
 	@Autowired
 	private ClienteService clienteService;
 
@@ -36,7 +41,6 @@ public class ClienteController {
 		}
 
 	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
 		try {
@@ -58,8 +62,8 @@ public class ClienteController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
 		}
 	}
-
 	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Cliente> updateClienteById(@PathVariable Long id, @RequestBody Cliente clienteModificado) {
 		try {
@@ -70,11 +74,10 @@ public class ClienteController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
 		}
-
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deteClienteById(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteClienteById(@PathVariable Long id) {
 		try {
 			clienteService.deleteClienteById(id);
 			return ResponseEntity.noContent().build(); 
@@ -86,5 +89,5 @@ public class ClienteController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
 		}
 	}
-
+	
 }

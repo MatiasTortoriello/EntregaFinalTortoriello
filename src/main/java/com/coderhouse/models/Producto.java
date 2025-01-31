@@ -39,6 +39,12 @@ public class Producto {
 	
 	@Column(name = "precio", length = 30, nullable = false)
 	private Float precio;
+	
+	@Column(name = "descripcion", length = 50, nullable = false)
+	private Float descripcion;
+
+	@Column(name = "stock", length = 10, nullable = false)
+	private Float stock;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -49,8 +55,7 @@ public class Producto {
 	
 	private List<Cliente> clientes = new ArrayList<>();
 
-	 @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) 
-	 @JsonIgnore                                                                                 
-	 private List<FacturaDetalle> facturaDetalles; 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Categoria categoria;
 
 }
