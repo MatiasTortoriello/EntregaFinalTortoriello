@@ -13,7 +13,7 @@ import com.coderhouse.services.CategoriaService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categoria")
+@RequestMapping("/api/categorias")
 @Tag(name ="Categoría", description = "Sistema de manejo de Categorías de productos")
 public class CategoriaController {
 

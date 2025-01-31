@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "venta_detalles")
+@Table(name = "detalle_de_venta")
 @Schema(description = "Modelo que representa los detalles de la venta de los productos", title = "Modelo del detalle de la venta de Productos")
 public class DetalleDeVenta {
 

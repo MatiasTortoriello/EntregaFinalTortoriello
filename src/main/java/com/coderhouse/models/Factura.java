@@ -43,6 +43,9 @@ public class Factura {
   @Column(name = "total", nullable = false) 
   private double total; 
   
+  @Column(name = "numeroFactura", nullable = false) 
+  private String numeroFactura; 
+  
   @Column(name = "cantidadProductosVendidos", nullable = false)
   private double cantidadProductosVendidos; 
 

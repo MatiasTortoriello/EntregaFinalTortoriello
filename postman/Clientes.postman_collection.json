@@ -15,7 +15,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/alumnos",
+					"raw": "http://localhost:8080/api/clientes",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -23,7 +23,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"alumnos"
+						"clientes"
 					]
 				}
 			},
@@ -38,7 +38,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/alumnos/1",
+					"raw": "http://localhost:8080/api/clientes/01",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,7 +46,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"alumnos",
+						"clientes",
 						"1"
 					]
 				}
@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Matias\",\r\n    \"apellido\": \"Tortoriello\",\r\n    \"dni\": 35533516,\r\n    \"legajo\": \"MT35533516\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Matias\",\r\n    \"apellido\": \"Tortoriello\",\r\n    \"dni\": 35533516,\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/alumnos/",
+					"raw": "http://localhost:8080/api/clientes/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -79,8 +79,28 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"alumnos",
+						"clientes",
 						""
+					]
+				}
+			},
+			"response": []
+		},{
+		"name": "BorrarUnCliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/clientes/010",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes",
+						"010"
 					]
 				}
 			},

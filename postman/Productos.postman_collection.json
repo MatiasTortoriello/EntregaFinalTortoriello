@@ -15,7 +15,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/cursos",
+					"raw": "http://localhost:8080/api/productos",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -38,7 +38,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/cursos/1",
+					"raw": "http://localhost:8080/api/productos/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,7 +46,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"cursos",
+						"productos",
 						"1"
 					]
 				}
@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Programación con Java\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"La Divina Comedia - Dante Alighieri\"\r\n \"descripcion\":\"Un clásico de la Literatura Universal\",\r\n \"precio\": 25000,\r\n \"stock\": 1000\r\n   }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,6 +72,66 @@
 				},
 				"url": {
 					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ActualizarUnProducto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"titulo\": \"Bar del Infierno - Alejandro Dolina\",\r\n        \"descripcion\": \"Uno de los mejores autores Argentinos, vuelve con más de su excelente narrativa.\",\r\n        \"precio\": 20000.0,\r\n        \"stock\": 1500,\r\n                 \"id\": 021,\r\n            \"nombre\": \"LiteraturaArgentina\"\r\n        }\r\n}\r\n        ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/producto/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producto",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},{
+		
+			"name": "agregarCategoriaEnUnProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productoId\": 035,\r\n    \"categoriaId\": 04\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/producto/asignar-categoria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producto",
+						"asignar-categoria"
+					]
 				}
 			},
 			"response": []
