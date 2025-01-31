@@ -23,7 +23,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"cursos"
+						"productos"
 					]
 				}
 			},
@@ -99,7 +99,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"producto",
+						"productos",
 						"2"
 					]
 				}
@@ -129,7 +129,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"producto",
+						"productos",
 						"asignar-categoria"
 					]
 				}
