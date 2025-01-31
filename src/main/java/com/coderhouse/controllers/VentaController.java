@@ -22,7 +22,7 @@ import java.util.List;
 
 @Tag(name = "Venta", description = "Gestión de ventas")
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/ventas")
 public class VentaController {
 
     @Autowired
